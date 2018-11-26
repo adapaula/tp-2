@@ -1,0 +1,179 @@
+body {
+  background: url(../images/background.jpg);
+}
+
+h1 {
+  color: #38acd5;
+  margin-top: 50px;
+  font-family: "pacifico", cursive;
+  font-size: 40px;
+  margin-bottom: 0;
+}
+
+.intro {
+  margin: auto;
+  display: block;
+  width: 40%;
+  height: 560px;
+  background-color: #f9e9df;
+  border: 20px solid black;
+  border-radius: 35px;
+  text-align: center;
+  font-family: "pangolin", cursive;
+  font-size: 20px;
+}
+.intro .namebox {
+  color: grey;
+  width: 50%;
+  border: 1px solid grey;
+  padding: 8px;
+}
+
+.texto, .dificultad {
+  margin: auto;
+}
+
+.btn-dificultad, .ups-nombre {
+  width: 60%;
+  color: white;
+  background-color: #ff9802;
+  border-radius: 10px;
+  padding: 10px 85px;
+  border: none;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-family: "pangolin", cursive;
+}
+
+.btn-dificultad:hover {
+  cursor: pointer;
+  background-color: #f9b043;
+}
+
+.ups-nombre {
+  background-color: #e9c4c4;
+  color: #ea0000;
+  padding: 10px 0px;
+  margin: auto;
+}
+
+.juego {
+  display: none;
+  width: 70%;
+  background-color: #f0e5d7a8;
+  border: 20px solid black;
+  border-radius: 35px;
+  text-align: center;
+  font-family: "pangolin", cursive;
+  font-size: 20px;
+  margin: auto;
+  margin-top: 30px;
+}
+.juego .name {
+  margin-left: 10px;
+}
+.juego .intentos-memo {
+  color: #38acd5;
+  margin: 6px;
+}
+.juego .intentos {
+  background-color: white;
+  border: 6px solid #38acd5;
+  border-radius: 10px;
+  padding: 9px;
+  width: 70%;
+  display: inline-block;
+  margin: 10px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+}
+
+.card-tapada img {
+  width: 100%;
+  border: 3px solid #ff9802;
+  text-align: center;
+}
+
+.card-destapada img {
+  width: 100%;
+  border: 3px solid #ff9802;
+  text-align: center;
+}
+
+.card-tapada {
+  width: 85%;
+  text-align: center;
+  margin: 10px;
+}
+
+.card-destapada {
+  display: none;
+  width: 85%;
+  text-align: center;
+  margin: 10px;
+}
+
+.card {
+  transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+  display: inline-block;
+  width: 180px;
+  height: 180px;
+}
+
+.flipped {
+  transform: rotatey(180deg);
+}
+
+.resultado-juego {
+  margin: auto;
+  width: 30%;
+  height: 200px;
+  background-color: #f9e9df;
+  border: 6px solid black;
+  border-radius: 10px;
+  text-align: center;
+  font-family: "pangolin", cursive;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.resultado-juego .btn-v {
+  width: 60%;
+  color: white;
+  background-color: #ff9802;
+  border-radius: 10px;
+  padding: 10px 0px;
+  border: none;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-family: "pangolin", cursive;
+}
+
+@media (max-width: 800px) {
+  .intro, .juego {
+    width: 50%;
+  }
+
+  .btn-dificultad, .required {
+    padding: 10px 0px;
+  }
+
+  .intentos {
+    padding: 9px 50px;
+    width: 50%;
+  }
+
+  .cards {
+    width: 50%;
+  }
+}
+
+/*# sourceMappingURL=estilos.css.map */

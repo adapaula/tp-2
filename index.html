@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+   <head>
+      <meta charset="utf-8">
+      <title>Memotest</title>
+      <meta name='viewport' content='width=device-width,initial-scale=1.0,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link href="https://fonts.googleapis.com/css?family=Pacifico|Pangolin" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/estilos.css">
+   </head>
+
+   <body>
+      <section class="intro" id= tablero01>
+         <div class="saludo">
+        <h1>Memotest</h1>
+        <p class="texto">¡Hola!<img src="images/mano.png"> Vamos a jugar al Memotest<br>
+        Pero antes de empezar...<br>
+        <img src="images/signopregunta1.png">Cuál es tu nombre<img src="images/signopregunta2.png">
+         </div>
+        <input id="nombre-jugador" value="" type="text" placeholder="Tu nombre" class="namebox">
+     
+     <div>
+        <p>¿Con qué dificultad te gustaría jugar?</p>
+     </div>
+        <div class="dificultad">
+            <button id="facil" class="btn-dificultad">FÁCIL</button>
+            <button id="intermedio" class="btn-dificultad">INTERMEDIO</button>
+            <button id="experto" class="btn-dificultad">EXPERTO</button>
+        <div class="ups-nombre">UPSS... El nombre es requerido</div>    
+    </div>
+      </section>
+     
+
+ <section class="juego" id= tablero02>
+    <div class="cartasTablero">
+       <h1>Memotest</h1>
+       <p class="texto">Hola<span class="name" id="jugadorx"></span><br>
+       Encontrá todos los pares en menos de<span><b class="intentos-memo"></b></span>intentos</p>
+       <span>Nivel</span><p class="dificultad"></p>  
+    </div>
+       <div class="cards">
+
+        </div>
+     
+        <div class="container-intentos">
+          <span class="intentos">Intentos:</span>
+        </div>
+ </section>
+    
+ <section class="resultado-juego">
+    <p>¡Ganaste! <img src="images/fiesta.png"> con x intentos<br>
+       Ya podes vover a jugar </p>
+       <button id="button-v" class="btn-v">VOLVER A JUGAR</button>
+ </section>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--<script src="memotest.js"></script>-->
+        <script src="jugador.js"></script> 
+   </body>
+</html>

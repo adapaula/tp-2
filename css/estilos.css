@@ -121,8 +121,6 @@ h1 {
 }
 
 .card {
-  transform-style: preserve-3d;
-  -webkit-transition: 0.5s;
   display: inline-block;
   width: 180px;
   height: 180px;
@@ -130,6 +128,13 @@ h1 {
 
 .flipped {
   transform: rotatey(180deg);
+  transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+}
+
+.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 .resultado-juego {

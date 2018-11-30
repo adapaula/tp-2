@@ -110,18 +110,22 @@ body {
                 margin: 10px;;
                 }
             .card {
-                transform-style: preserve-3d;
-               -webkit-transition: 0.5s;
+
                 display: inline-block;
                 width: 180px;
                 height: 180px;
+
             }
+
             .flipped {
-            transform: rotatey(180deg);
-            }
-           //* .cartasiguales {
-           //*   filter: grayscale(100%);
-            //}
+                transform: rotatey(180deg);
+                transform-style: preserve-3d;
+                -webkit-transition: 0.5s;
+                }
+               .grayscale {
+                -webkit-filter: grayscale(100%);
+                filter: grayscale(100%);
+                }
            // .color {
            //     filter: grayscale(100%);
            //     -webkit-filter: grayscale(100%);

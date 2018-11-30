@@ -1,24 +1,21 @@
-var click = 0;
+var clicks = 0;
 var maxIntentos;
 var intentos = 0;
-var match = 0;
-
 
 let imagenes = [
-    {id: 1, img: "img1", data: "uno", src: "images/alce.jpg"}, 
-    {id: 2, img: "img2", data: "dos", src: "images/alce.jpg"}, 
-    {id: 3, img: "img3", data: "tres", src: "images/zapatillas.jpg"}, 
-    {id: 4, img: "img4", data: "cuatro", src: "images/zapatillas.jpg"}, 
-    {id: 5, img: "img5", data: "cinco", src: "images/elefante.jpg"}, 
-    {id: 6, img: "img6", data: "seis", src: "images/elefante.jpg"}, 
-    {id: 7, img: "img7", data: "siete", src: "images/peces.jpg"},
-    {id: 8, img: "img8", data: "ocho", src: "images/peces.jpg"}, 
-    {id: 9, img: "img9", data: "nueve", src: "images/chica.jpg"},
-    {id: 10, img: "img10", data: "diez", src: "images/chica.jpg"},
-    {id: 11, img: "img11", data: "once", src: "images/unichancho.jpg"},
-    {id: 12, img: "img12", data: "doce", src: "images/unichancho.jpg"}
-
-    ];
+    {id: 1, imgcard: "img1", src: "images/alce.jpg"}, 
+    {id: 2, imgcard: "img1", src: "images/alce.jpg"}, 
+    {id: 3, imgcard: "img2", src: "images/zapatillas.jpg"}, 
+    {id: 4, imgcard: "img2", src: "images/zapatillas.jpg"}, 
+    {id: 5, imgcard: "img3", src: "images/elefante.jpg"}, 
+    {id: 6, imgcard: "img3", src: "images/elefante.jpg"}, 
+    {id: 7, imgcard: "img4", src: "images/peces.jpg"},
+    {id: 8, imgcard: "img4", src: "images/peces.jpg"}, 
+    {id: 9, imgcard: "img5", src: "images/chica.jpg"},
+    {id: 10, imgcard: "img5", src: "images/chica.jpg"},
+    {id: 11, imgcard: "img6", src: "images/unichancho.jpg"},
+    {id: 12, imgcard: "img6", src: "images/unichancho.jpg"}
+  ];
     
     // mezclamos las cartas
   function shuffle(a) {
@@ -34,125 +31,136 @@ let imagenes = [
   $(".resultado-juego").hide();
 
 
-  $("#facil, #intermedio, #experto").on("click", function(){
- var valorBtn= $(this).html()
- var inputNombre =$("#nombre-jugador").val()
- var inputNombreJugador = $("#jugadorx").append(inputNombre);
- 
-// dificultades
-if (inputNombre != ""){
-    $("#tablero01").hide();
-    $("#tablero02").show();
-
-  switch(valorBtn){
-    case "FÁCIL": maxIntentos = 18;
-         $(".intentos-memo").append(maxIntentos);
-         $(".dificultad").append(valorBtn);
-         break;
-    case "INTERMEDIO": maxIntentos = 12;
-         $(".intentos-memo").append(maxIntentos);
-         $(".dificultad").append(valorBtn);
-         break;
-    case "EXPERTO": maxIntentos = 9;
-         $(".intentos-memo").append(maxIntentos);
-         $(".dificultad").append(valorBtn);
-         break;
-  }
-
- }else{
-  $(".ups-nombre").show();
-  
- }
+ $("#facil, #intermedio, #experto").on("click", function(){
+	 // console.log("apretaste un boton")
+	 var valorBtn = $(this).html()
+	 console.log(valorBtn)
+	 //console.log(valorBtn)
+	 var inputNombre = $("#nombre-jugador").val()
+	 //console.log(111, inputNombre)
+	 var inputNombreJugador = $("#jugadorx").append(inputNombre);
+	 
+	// Cuando el imput tenga valor (es decir que sea distinto a "")
+	// hacer sectionDificultad.hide() y en cambio hacer .show de la
+	// sección tablero
+	if (inputNombre != "") {
+	 //   console.log("campo llenoS")
+		$("#tablero01").hide();
+		$("#tablero02").show();
+	
+	// definimos las dificultades
+	  switch(valorBtn) {
+		case "FÁCIL": maxIntentos = 18;
+			 $(".intentos-memo").append(maxIntentos);
+			 $(".dificultad").append(valorBtn);
+			 break;
+		case "INTERMEDIO": maxIntentos = 12;
+			 $(".intentos-memo").append(maxIntentos);
+			 $(".dificultad").append(valorBtn);
+			 break;
+		case "EXPERTO": maxIntentos = 9;
+			 $(".intentos-memo").append(maxIntentos);
+			 $(".dificultad").append(valorBtn);
+			 break;
+		}
+	 } else {
+	  $(".ups-nombre").show();
+	  
+	 }
 })
 
-// probando flip
-$(document).on('click', '.card', function () {
-  $(this).toggleClass('flipped');
-  $(this).children('.card-tapada').hide()
-  $(this).children('.card-destapada').show()
-
-  return false;
-
-});
-
-// creacion del tablero con las cartas de forma dinamica
-for (let i = 0; i < imagenes.length; i++) {
-    let divCard = $('<div></div>').addClass('card');
-    let divCardTapada = $('<div></div>').addClass('card-tapada');
-    let imgDivCardTapada = $('<img />').attr('src', 'images/back.jpg');
-    let divCardDestapada = $('<div></div>').addClass('card-destapada');
-    let imgDivCardDestapada = $('<img />').attr('src', imagenes[i].src);
-    divCardDestapada.append(imgDivCardDestapada);
-    divCardTapada.append(imgDivCardTapada);
-    divCard.append(divCardTapada).append(divCardDestapada);
-    $('.cards').append(divCard);
+// creamos el tablero
+function crearTablero() {
+  for (let i = 0; i < imagenes.length; i++) {
+	  var card = $('<div></div>').addClass('card');
+	  var cardTapada = $('<div></div>').addClass('card-tapada');
+	  var imgCardTapada = $('<img />').attr('src', 'images/back.jpg');
+	  var cardDestapada = $('<div></div>').addClass('card-destapada');
+	  var imgCardDestapada = $('<img />').attr('src', imagenes[i].src);
+	
+	  cardDestapada.append(imgCardDestapada);
+	  cardTapada.append(imgCardTapada);
+	  card.append(cardTapada).append(cardDestapada);
+	  imgCardDestapada.attr('id', imagenes[i].id);
+	  imgCardDestapada.attr('imgcard', imagenes[i].imgcard);
+	  //imgCardDestapada.attr("id", i);
+	  
+	  $('.cards').append(card);
   } 
+}
 
-  /*var cliks = 0;
-$(".card").on("click", function(){
-  const imgSrc = $(this).children().attr("src")
-  const id = $(this).attr("id")
-
-  cliks++;
-  if (clicks == + 1) {
-    carta1 = {
-      scr: imgSrc,
-      id: id
-    } else {
-      carta2 = {
-        scr: imgSrc,
-        id: id   
-    }
-    clicks = 0
-  }
-
-})
-
-$("#" + imagen1.id)*/
-
-
-var carta1 = {
-  data: "",
-  id: null
-};
-
-// NO FUNCIONA - comparar cartas
-$("carta-destapada").on("click", function () {
+  // probando flip
+$(document).on('click', '.card', function () {
+	$(this).toggleClass('flipped');
+	$(this).children('.card-tapada').hide()
+  $(this).children('.card-destapada').show()
+	
+	var primerCarta = $(this);
+	const imgSrc = $(this).children('.card-destapada').children('img').attr('src');
+	const imgId = $(this).children('.card-destapada').children('img').attr('id');
+	primerCarta.addClass("flipped");
+	
+	clicks = clicks + 1;
+	if (clicks === 1) {
+		carta1 = {
+		imgSrc,
+		imgId
+		} 
+	} else {
+		carta2 = {
+		imgSrc,
+		imgId   
+		}
+		compararCartas(carta1, carta2)
+		clicks = 0
+	
+		//Acá habría que setear carta 1 y 2 para que se tapen de nuevo?
+	}
+//	console.log(clicks)
+//	console.log(carta1)
+//	console.log(carta2)
   
-  if (click == + 1 && intentos < maxIntentos && carta1.id != $(this)[0].id) {
-         
-    $(this).children("card-destapada").show();
-    $(this).parent("img").addClass("visible");
-    
-    if (carta1.src == "") {
-      carta1.id = $(this)[0].id; 
-      carta1.src = $(this).src("card-destapada");
-      click++;
-    }   
-    
-    else { 
-      carta2 = $(this).children("img").attr("src"); 
-      
-      if (carta1 === carta2) { 
-        $(".card-tapada").children("img[src='" + carta2 + "']").addClass("match");
-      } 
-      
-      else { 
-        setTimeout(function () {
-          that.attr("src", "images/back.jpg"); 
-            $("#" + carta1.id).attr("src", "images/back.jpg");
-            $("#" + carta1.id).removeClass("flipped");
-            that.removeClass("flipped");
-
-        }, 1000);
-      }
-      
-           click = 0; 
-      setTimeout(function () { 
-        console.clear(); }, 60000);      
-    }
-  }
+      return false;
 });
 
+var carta1 = null;
+var carta2 = null;
+var noCoinciden = 0;
 
+function compararCartas(imagen1, imagen2) {
+	var coinciden = false;
+	
+	if (imagen1.imgSrc === imagen2.imgSrc && imagen1.imgId === imagen2.imgId) {
+		//console.log(imagen1)
+		//console.log(imagen2)
+		setTimeout(function(){  
+			$("#" + imagen1.imgId).children().addClass("grayscale");
+			$("#" + imagen2.imgId).children().addClass("grayscale");
+		}, 600)
+		intentos = intentos + 1
+
+		coinciden = true;
+		
+		return coinciden
+	} else {
+		setTimeout(function(){
+		//	console.log(imagen1)
+		//	console.log(imagen2)
+		$("#" + imagen1.imgId).removeClass("flipped");
+		$("#" + imagen2.imgId).removeClass("flipped");
+		
+		}, 800) 
+		noCoinciden = noCoinciden + 1
+		$(".intentos").text(noCoinciden)
+		
+		return coinciden;
+	}
+}
+
+crearTablero();
+
+
+
+
+  
 

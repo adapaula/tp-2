@@ -83,21 +83,24 @@ function crearTablero() {
 	  card.append(cardTapada).append(cardDestapada);
 	  imgCardDestapada.attr('id', imagenes[i].id);
 	  imgCardDestapada.attr('imgcard', imagenes[i].imgcard);
-	  //imgCardDestapada.attr("id", i);
 	  
 	  $('.cards').append(card);
   } 
 }
 
+var carta1 = null;
+var carta2 = null;
+var noCoinciden = 0;
+
   // probando flip
 $(document).on('click', '.card', function () {
 	$(this).toggleClass('flipped');
 	$(this).children('.card-tapada').hide()
-  $(this).children('.card-destapada').show()
+  	$(this).children('.card-destapada').show()
 	
 	var primerCarta = $(this);
 	const imgSrc = $(this).children('.card-destapada').children('img').attr('src');
-	const imgId = $(this).children('.card-destapada').children('img').attr('id');
+	const imgId = $(this).children('.card-destapada').children('img').attr('imgcard');
 	primerCarta.addClass("flipped");
 	
 	clicks = clicks + 1;
@@ -113,8 +116,6 @@ $(document).on('click', '.card', function () {
 		}
 		compararCartas(carta1, carta2)
 		clicks = 0
-	
-		//Acá habría que setear carta 1 y 2 para que se tapen de nuevo?
 	}
 //	console.log(clicks)
 //	console.log(carta1)
@@ -123,19 +124,20 @@ $(document).on('click', '.card', function () {
       return false;
 });
 
-var carta1 = null;
-var carta2 = null;
-var noCoinciden = 0;
 
 function compararCartas(imagen1, imagen2) {
 	var coinciden = false;
 	
 	if (imagen1.imgSrc === imagen2.imgSrc && imagen1.imgId === imagen2.imgId) {
-		//console.log(imagen1)
-		//console.log(imagen2)
+		console.log(imagen1, "carta 1")
+		console.log(imagen2, "carta1 y 2 son iguales")
+	
 		setTimeout(function(){  
-			$("#" + imagen1.imgId).children().addClass("grayscale");
-			$("#" + imagen2.imgId).children().addClass("grayscale");
+			$("#" + imagen1.imgId).children().addClass("grayscale");// no funciona
+			$("#" + imagen2.imgId).children().addClass("grayscale");// no funciona
+			console.log(imagen1, "escala de grissssss")
+			console.log(imagen2, "escala de grissssss")
+		
 		}, 600)
 		intentos = intentos + 1
 
@@ -144,10 +146,15 @@ function compararCartas(imagen1, imagen2) {
 		return coinciden
 	} else {
 		setTimeout(function(){
-		//	console.log(imagen1)
-		//	console.log(imagen2)
-		$("#" + imagen1.imgId).removeClass("flipped");
-		$("#" + imagen2.imgId).removeClass("flipped");
+			console.log(imagen1, "carta1")
+			console.log(imagen2, "carta1 y 2 son distintas")
+		
+		$("#" + imagen1.imgId).removeClass("flipped");// no funciona
+		$("#" + imagen2.imgId).removeClass("flipped");// no funciona
+		console.log(imagen1, "date vueltaaaaaaa")
+		console.log(imagen2, "date vueltaaaaaaa")
+	//	$(this).children('.card-tapada').show()
+	//	$(this).children('.card-destapada').hide()
 		
 		}, 800) 
 		noCoinciden = noCoinciden + 1
@@ -158,9 +165,3 @@ function compararCartas(imagen1, imagen2) {
 }
 
 crearTablero();
-
-
-
-
-  
-

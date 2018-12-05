@@ -21,7 +21,7 @@ let imagenes = [
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+        [imagenes[i], imagenes[j]] = [imagenes[j], imagenes[i]];
     }
     return a;
   }
@@ -35,7 +35,6 @@ let imagenes = [
 	 // console.log("apretaste un boton")
 	 var valorBtn = $(this).html()
 	 console.log(valorBtn)
-	 //console.log(valorBtn)
 	 var inputNombre = $("#nombre-jugador").val()
 	 //console.log(111, inputNombre)
 	 var inputNombreJugador = $("#jugadorx").append(inputNombre);
@@ -69,6 +68,7 @@ let imagenes = [
 	 }
 })
 
+
 // creamos el tablero
 function crearTablero() {
   for (let i = 0; i < imagenes.length; i++) {
@@ -79,11 +79,16 @@ function crearTablero() {
 	  var imgCardDestapada = $('<img />').attr('src', imagenes[i].src);
 	
 	  cardDestapada.append(imgCardDestapada);
-	  cardTapada.append(imgCardTapada);
-	  card.append(cardTapada).append(cardDestapada);
-	  imgCardDestapada.attr('id', imagenes[i].id);
-	  imgCardDestapada.attr('imgcard', imagenes[i].imgcard);
+	  cardDestapada.addClass(imagenes[i].id)
 	  
+	  cardTapada.append(imgCardTapada);
+	  cardTapada.addClass(imagenes[i].id)
+	  card.append(cardTapada).append(cardDestapada);
+
+	  imgCardDestapada.attr('imgcard', imagenes[i].imgcard);
+	  imgCardDestapada.attr('id', imagenes[i].id);
+	 
+	  	  
 	  $('.cards').append(card);
   } 
 }
@@ -91,6 +96,7 @@ function crearTablero() {
 var carta1 = null;
 var carta2 = null;
 var noCoinciden = 0;
+var match = 0
 
   // probando flip
 $(document).on('click', '.card', function () {
@@ -98,12 +104,12 @@ $(document).on('click', '.card', function () {
 	$(this).children('.card-tapada').hide()
   	$(this).children('.card-destapada').show()
 	
-	var primerCarta = $(this);
 	const imgSrc = $(this).children('.card-destapada').children('img').attr('src');
 	const imgId = $(this).children('.card-destapada').children('img').attr('imgcard');
-	primerCarta.addClass("flipped");
-	
+
 	clicks = clicks + 1;
+	console.log(clicks, 'cantidad')
+	
 	if (clicks === 1) {
 		carta1 = {
 		imgSrc,
@@ -114,54 +120,56 @@ $(document).on('click', '.card', function () {
 		imgSrc,
 		imgId   
 		}
+
 		compararCartas(carta1, carta2)
 		clicks = 0
 	}
-//	console.log(clicks)
-//	console.log(carta1)
-//	console.log(carta2)
   
-      return false;
+      //return false;
 });
-
 
 function compararCartas(imagen1, imagen2) {
 	var coinciden = false;
-	
+	console.log("imagen 1", imagen1)
+	console.log("imagen 2", imagen2)
 	if (imagen1.imgSrc === imagen2.imgSrc && imagen1.imgId === imagen2.imgId) {
-		console.log(imagen1, "carta 1")
-		console.log(imagen2, "carta1 y 2 son iguales")
-	
+		
 		setTimeout(function(){  
 			$("#" + imagen1.imgId).children().addClass("grayscale");// no funciona
 			$("#" + imagen2.imgId).children().addClass("grayscale");// no funciona
 			console.log(imagen1, "escala de grissssss")
 			console.log(imagen2, "escala de grissssss")
-		
-		}, 600)
+			}, 600)
 		intentos = intentos + 1
 
 		coinciden = true;
 		
 		return coinciden
 	} else {
+		var that = $(this);
 		setTimeout(function(){
+	
 			console.log(imagen1, "carta1")
 			console.log(imagen2, "carta1 y 2 son distintas")
-		
-		$("#" + imagen1.imgId).removeClass("flipped");// no funciona
-		$("#" + imagen2.imgId).removeClass("flipped");// no funciona
+	
+	  
+		$("#" + imagen1.imgId).parent().toggleClass('flipped');// no funciona
+		$("#" + imagen2.imgId).parent().toggleClass('flipped');// no funciona
+
 		console.log(imagen1, "date vueltaaaaaaa")
 		console.log(imagen2, "date vueltaaaaaaa")
-	//	$(this).children('.card-tapada').show()
-	//	$(this).children('.card-destapada').hide()
+		$(this).children('.card-tapada').show()
+		$(this).children('.card-destapada').hide()
 		
-		}, 800) 
+		}, 1000) 
 		noCoinciden = noCoinciden + 1
-		$(".intentos").text(noCoinciden)
+		$(".intentos").html(noCoinciden)
 		
 		return coinciden;
 	}
 }
 
 crearTablero();
+
+
+

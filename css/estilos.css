@@ -33,7 +33,7 @@ h1 {
   margin: auto;
 }
 
-.btn-dificultad, .ups-nombre {
+.btn-dificultad {
   width: 60%;
   color: white;
   background-color: #ff9802;
@@ -52,7 +52,6 @@ h1 {
 }
 
 .ups-nombre {
-  background-color: #e9c4c4;
   color: #ea0000;
   padding: 10px 0px;
   margin: auto;
@@ -164,7 +163,7 @@ h1 {
 
 @media (max-width: 800px) {
   .intro, .juego {
-    width: 50%;
+    width: 80%;
   }
 
   .btn-dificultad, .required {
@@ -177,7 +176,11 @@ h1 {
   }
 
   .cards {
-    width: 50%;
+    width: 100%;
+  }
+  .cards .card {
+    width: 30%;
+    height: 120px;
   }
 }
 

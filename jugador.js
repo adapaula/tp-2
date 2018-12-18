@@ -69,6 +69,7 @@ let imagenes = [
 })
 
 
+
 // creamos el tablero
 function crearTablero() {
   for (let i = 0; i < imagenes.length; i++) {
@@ -87,8 +88,7 @@ function crearTablero() {
 
 	  imgCardDestapada.attr('imgcard', imagenes[i].imgcard);
 	  imgCardDestapada.attr('id', imagenes[i].id);
-	 
-	  	  
+	 	  	  
 	  $('.cards').append(card);
   } 
 }
@@ -96,7 +96,7 @@ function crearTablero() {
 var carta1 = null;
 var carta2 = null;
 var noCoinciden = 0;
-var match = 0
+var match = 0;
 
   // probando flip
 $(document).on('click', '.card', function () {
@@ -105,7 +105,8 @@ $(document).on('click', '.card', function () {
   	$(this).children('.card-destapada').show()
 	
 	const imgSrc = $(this).children('.card-destapada').children('img').attr('src');
-	const imgId = $(this).children('.card-destapada').children('img').attr('imgcard');
+	const imgCard = $(this).children('.card-destapada').children('img').attr('imgcard');
+	const imgId = $(this).children('.card-destapada').children('img').attr('id');
 
 	clicks = clicks + 1;
 	console.log(clicks, 'cantidad')
@@ -113,61 +114,86 @@ $(document).on('click', '.card', function () {
 	if (clicks === 1) {
 		carta1 = {
 		imgSrc,
-		imgId
+		imgId,
+		imgCard
 		} 
 	} else {
 		carta2 = {
 		imgSrc,
-		imgId   
+		imgId,
+		imgCard   
 		}
-
 		compararCartas(carta1, carta2)
 		clicks = 0
 	}
-  
       //return false;
 });
 
 function compararCartas(imagen1, imagen2) {
-	var coinciden = false;
+	var match = false;
 	console.log("imagen 1", imagen1)
 	console.log("imagen 2", imagen2)
-	if (imagen1.imgSrc === imagen2.imgSrc && imagen1.imgId === imagen2.imgId) {
-		
+	if (imagen1.imgSrc === imagen2.imgSrc && imagen1.imgCard === imagen2.imgCard) {
 		setTimeout(function(){  
-			$("#" + imagen1.imgId).children().addClass("grayscale");// no funciona
-			$("#" + imagen2.imgId).children().addClass("grayscale");// no funciona
-			console.log(imagen1, "escala de grissssss")
-			console.log(imagen2, "escala de grissssss")
-			}, 600)
+			$("#" + imagen1.imgId).addClass("grayscale");
+			$("#" + imagen2.imgId).addClass("grayscale");
+			}, 1000)
 		intentos = intentos + 1
-
-		coinciden = true;
-		
-		return coinciden
+		ganaste();
+		match = true;
+		return match
 	} else {
-		var that = $(this);
 		setTimeout(function(){
-	
-			console.log(imagen1, "carta1")
-			console.log(imagen2, "carta1 y 2 son distintas")
-	
-	  
-		$("#" + imagen1.imgId).parent().toggleClass('flipped');// no funciona
-		$("#" + imagen2.imgId).parent().toggleClass('flipped');// no funciona
-
-		console.log(imagen1, "date vueltaaaaaaa")
-		console.log(imagen2, "date vueltaaaaaaa")
-		$(this).children('.card-tapada').show()
-		$(this).children('.card-destapada').hide()
-		
+		$("#" + imagen1.imgId).parent().parent().toggleClass('flipped');
+		$("#" + imagen2.imgId).parent().parent().toggleClass('flipped');
+		$('.card-tapada').show()
+		$('.card-destapada').hide()
 		}, 1000) 
 		noCoinciden = noCoinciden + 1
-		$(".intentos").html(noCoinciden)
-		
-		return coinciden;
+		$(".intentos").text(noCoinciden)
+		perdiste(noCoinciden)
+		return match;
 	}
 }
+
+var jugadorDatos = {
+	name: '',
+	dificultad: '',
+	intentosJugador: 0,
+  }
+
+  var ranking = [];
+
+function ganaste() {
+	if (match == 6) {
+	  //verificarLocalStorage();
+	  //rankingUsers.push(jugadorDatos);
+	  //savingPlayers();
+	  //creeatingRanking();
+	  jugadorDatos.intentosJugador = noCoinciden
+	  //$(".modal").addClass("show-modal");
+	  $(".insert-text").text("Felicidades! Ganaste");
+	  //var spanAttempts = $("<span class='attempts'>Con " + jugadorDatos.intentosJugador + " intentos</span>")
+	  //$(".modal-text").append(spanAttempts)
+  
+	}
+  }
+
+  function perdiste(lalala) {
+	if (lalala === jugadorDatos.totalAttempts && match != 6) {
+		console.log()
+	  //$(".insert-text").text("Perdiste! Inténtalo de nuevo!");
+	  //$(".modal").addClass("show-modal");
+	  //$(".cont-ranking-table").addClass("hide-table")
+	}
+  }
+
+
+
+
+
+
+
 
 crearTablero();
 

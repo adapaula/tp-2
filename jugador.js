@@ -156,6 +156,9 @@ function compararCartas(imagen1, imagen2) {
 	}
 }
 
+
+
+/*
 var jugadorDatos = {
 	name: '',
 	dificultad: '',
@@ -166,27 +169,17 @@ var jugadorDatos = {
 
 function ganaste() {
 	if (match == 6) {
-	  //verificarLocalStorage();
-	  //rankingUsers.push(jugadorDatos);
-	  //savingPlayers();
-	  //creeatingRanking();
-	  jugadorDatos.intentosJugador = noCoinciden
-	  //$(".modal").addClass("show-modal");
-	  $(".insert-text").text("Felicidades! Ganaste");
-	  //var spanAttempts = $("<span class='attempts'>Con " + jugadorDatos.intentosJugador + " intentos</span>")
-	  //$(".modal-text").append(spanAttempts)
+	 
   
 	}
   }
 
   function perdiste(lalala) {
-	if (lalala === jugadorDatos.totalAttempts && match != 6) {
+	if (lalala === jugadorDatos.intentos && match != 6) {
 		console.log()
-	  //$(".insert-text").text("Perdiste! Inténtalo de nuevo!");
-	  //$(".modal").addClass("show-modal");
-	  //$(".cont-ranking-table").addClass("hide-table")
+	 
 	}
-  }
+  }*/
 
 
 

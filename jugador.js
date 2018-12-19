@@ -156,9 +156,6 @@ function compararCartas(imagen1, imagen2) {
 	}
 }
 
-
-
-/*
 var jugadorDatos = {
 	name: '',
 	dificultad: '',
@@ -174,17 +171,13 @@ function ganaste() {
 	}
   }
 
-  function perdiste(lalala) {
-	if (lalala === jugadorDatos.intentos && match != 6) {
+  function perdiste() {
+	if (match != 6) {
 		console.log()
 	 
 	}
-  }*/
-
-
-
-
-
+	}
+	
 
 
 
